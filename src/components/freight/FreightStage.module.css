@@ -1,0 +1,200 @@
+.stage {
+  position: relative;
+  height: 92px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ece4d0 0%, #ece4d0 60%, #d8c49c 60%, #c4ac80 100%);
+}
+
+.ground {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: calc(100% + 44px);
+  height: 10px;
+  background: repeating-linear-gradient(90deg, #8a6a45 0 14px, #a8875c 14px 22px);
+}
+
+.motion .groundMoving {
+  animation: ground 0.25s linear infinite;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+}
+
+.centered {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+}
+
+.centered.low {
+  bottom: 2px;
+}
+
+/* Burro: plods across, stops to graze, sulks ("Hmpf!"), then carries on. */
+.trip {
+  position: absolute;
+  left: 6px;
+  bottom: 8px;
+  width: calc(100% - 96px);
+  height: 70px;
+  animation: trip 6s ease-in-out forwards;
+}
+
+.hmpf {
+  position: absolute;
+  left: 70px;
+  top: -6px;
+  font-family: var(--font-typewriter);
+  font-weight: 700;
+  font-size: 12px;
+  background: #fbf5e6;
+  border: 1px solid #1f1a14;
+  padding: 1px 5px;
+  opacity: 0;
+  animation: hmpf 6s linear forwards;
+}
+
+/* Cavalo: gallops on the spot while the road and dust fly past. */
+.gallop {
+  position: absolute;
+  left: calc(50% - 44px);
+  bottom: 8px;
+}
+
+.bob {
+  animation: bob 0.32s ease-in-out infinite;
+}
+
+.dust {
+  position: absolute;
+  bottom: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #c9b48a;
+  opacity: 0;
+  animation: dust 0.6s ease-out infinite;
+}
+
+/* Charrete: rolls in from the left and settles. */
+.roll {
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: calc(100% - 160px);
+  animation: roll 1.8s cubic-bezier(0.15, 0.7, 0.3, 1) both;
+}
+
+/* Which scene shows. "hover" stages play while their card (marked data-freight-hover) is
+   hovered or focused; motion-averse visitors always get the still engraving. */
+.stage[data-play='always'] .still,
+.stage[data-play='hover'] .motion {
+  display: none;
+}
+
+:global([data-freight-hover]:is(:hover, :focus-within)) .stage[data-play='hover'] .motion {
+  display: block;
+}
+
+:global([data-freight-hover]:is(:hover, :focus-within)) .stage[data-play='hover'] .still {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage .motion {
+    display: none !important;
+  }
+
+  .stage .still {
+    display: block !important;
+  }
+}
+
+@keyframes ground {
+  to {
+    transform: translateX(-22px);
+  }
+}
+
+@keyframes trip {
+  0% {
+    transform: translateX(0);
+  }
+  38%,
+  58% {
+    transform: translateX(45%);
+  }
+  61% {
+    transform: translateX(43%);
+  }
+  63% {
+    transform: translateX(47%);
+  }
+  65% {
+    transform: translateX(43%);
+  }
+  67% {
+    transform: translateX(47%);
+  }
+  69%,
+  76% {
+    transform: translateX(45%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes hmpf {
+  0%,
+  60% {
+    opacity: 0;
+  }
+  63%,
+  76% {
+    opacity: 1;
+  }
+  80%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes dust {
+  0% {
+    opacity: 0.8;
+    transform: translate(0, 0) scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-26px, -8px) scale(1.6);
+  }
+}
+
+@keyframes roll {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(50%);
+    opacity: 1;
+  }
+}

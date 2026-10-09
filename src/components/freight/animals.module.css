@@ -1,0 +1,100 @@
+/* Animal-drawn freight, in SVG + CSS. Everything moves with transform/opacity only, so the
+   animations stay on the compositor. Durations and repeat counts come in as custom properties
+   (--leg-duration, --leg-repeat, …) because each scene paces its animals differently. */
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.horse {
+  color: #1f1a14;
+}
+
+.donkey {
+  color: #5a5144;
+}
+
+.legA,
+.legB {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+}
+
+.running .legA {
+  animation: legA var(--leg-duration, 0.4s) ease-in-out var(--leg-repeat, infinite);
+}
+
+.running .legB {
+  animation: legB var(--leg-duration, 0.4s) ease-in-out var(--leg-repeat, infinite);
+}
+
+.wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.running .wheel {
+  animation: spin var(--spin-duration, 0.5s) linear var(--spin-repeat, infinite);
+}
+
+.running .cartBed {
+  animation: bounce 0.25s ease-in-out var(--bounce-repeat, infinite);
+}
+
+.grazingHead {
+  transform-box: view-box;
+  transform-origin: 70px 38px;
+  animation: graze 6s ease-in-out forwards;
+}
+
+@keyframes legA {
+  0%,
+  100% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(-20deg);
+  }
+}
+
+@keyframes legB {
+  0%,
+  100% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes graze {
+  0%,
+  36% {
+    transform: rotate(0);
+  }
+  42%,
+  54% {
+    transform: rotate(38deg);
+  }
+  60%,
+  100% {
+    transform: rotate(0);
+  }
+}
