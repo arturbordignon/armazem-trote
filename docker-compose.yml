@@ -1,0 +1,64 @@
+name: armazem-trote
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: trote
+      POSTGRES_PASSWORD: trote
+      POSTGRES_DB: armazem
+    ports:
+      - '${POSTGRES_HOST_PORT:-5434}:5432'
+    # Log any statement slower than 200ms so slow paths surface during development.
+    command: >
+      postgres
+        -c max_connections=200
+        -c shared_buffers=256MB
+        -c log_min_duration_statement=200
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U trote -d armazem']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  redis:
+    image: redis:7.4-alpine
+    # One instance holds cache, guest carts and the job queue, so nothing may be evicted
+    # silently (BullMQ requires noeviction); cache entries are bounded by their TTLs instead.
+    # AOF keeps guest carts across restarts.
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy noeviction
+    ports:
+      - '${REDIS_HOST_PORT:-6380}:6379'
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  # Optional transaction-mode pooler: `docker compose --profile pooler up -d`, then point
+  # DATABASE_URL at port 6432 and set DATABASE_PREPARED_STATEMENTS=false.
+  pgbouncer:
+    image: edoburu/pgbouncer:latest
+    profiles: [pooler]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_USER: trote
+      DB_PASSWORD: trote
+      DB_NAME: armazem
+      AUTH_TYPE: scram-sha-256
+      POOL_MODE: transaction
+      MAX_CLIENT_CONN: 1000
+      DEFAULT_POOL_SIZE: 20
+    ports:
+      - '${PGBOUNCER_HOST_PORT:-6432}:5432'
+
+volumes:
+  pgdata:
+  redisdata:
