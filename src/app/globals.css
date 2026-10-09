@@ -1,0 +1,169 @@
+/* Armazém Trote & Cia — design tokens and page-wide base styles. Component styles live next to
+   their components as CSS modules. */
+
+:root {
+  /* Ink and paper */
+  --ink: #1e1610;
+  --ink-soft: #2e2318;
+  --ink-muted: #3a2c1e;
+  --ink-faded: #5b4631;
+  --paper: #eee6d6;
+  --paper-card: #fbf6ea;
+  --paper-warm: #f3e8cf;
+  --paper-frame: #e9dec4;
+  --paper-hover: #f1e6cc;
+  --paper-light: #e9dfc8;
+
+  /* Shop colours */
+  --red: #8b2b1f;
+  --red-dark: #6e2017;
+  --red-deep: #4a160f;
+  --red-wash: #f6e2da;
+  --brass: #c49a45;
+  --brass-light: #ebd08a;
+  --brass-dark: #7c5a1e;
+  --brass-deep: #6b4f1d;
+  --gold: #e2be62;
+  --olive: #4e5128;
+  --olive-dark: #3e4120;
+  --olive-ok: #4a4d22;
+  --tan: #c8a675;
+  --leather: #6e5538;
+  --wood: #3b2416;
+  --wood-light: #6b4428;
+  --blue-ink: #2c3e66;
+
+  /* Type */
+  --font-body: var(--font-fell), Georgia, serif;
+  --font-caps: var(--font-fell-sc), Georgia, serif;
+  --font-label: var(--font-oswald), 'Arial Narrow', sans-serif;
+  --font-display: var(--font-ultra), Georgia, serif;
+  --font-western: var(--font-rye), Georgia, serif;
+  --font-typewriter: var(--font-courier), 'Courier New', monospace;
+  --font-script: var(--font-hand), cursive;
+
+  /* Layout */
+  --page-width: 1240px;
+  --gutter: 16px;
+  --header-offset: 170px;
+
+  /* Reusable surfaces */
+  --brass-gradient: linear-gradient(180deg, #ebd08a 0%, #c49a45 48%, #9c7630 100%);
+  --red-gradient: linear-gradient(180deg, #9e3324, #7e261b);
+  --red-gradient-hover: linear-gradient(180deg, #8b2b1f, #6e2017);
+  --brass-knob: radial-gradient(circle at 35% 30%, #f2dc9c, #c49a45 50%, #8a6526);
+  --shelf: linear-gradient(180deg, #8a5a36 0 4px, #5a3820 4px, #3b2416);
+  --notebook-margin: linear-gradient(
+    90deg,
+    transparent 38px,
+    #c9776b 38px 39px,
+    transparent 39px 42px,
+    #c9776b 42px 43px,
+    transparent 43px
+  );
+  --notebook-rules: repeating-linear-gradient(180deg, transparent 0 31px, #b9cad6 31px 32px);
+  --framed-card: inset 0 0 0 4px var(--paper-card), inset 0 0 0 5px var(--ink);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse 60% 40% at 15% 20%, rgba(170, 135, 90, 0.12), transparent 70%),
+    radial-gradient(ellipse 50% 35% at 85% 65%, rgba(170, 135, 90, 0.1), transparent 70%),
+    radial-gradient(rgba(90, 60, 30, 0.07) 1px, transparent 1px),
+    radial-gradient(rgba(90, 60, 30, 0.05) 1px, transparent 1px);
+  background-size:
+    100% 900px,
+    100% 1100px,
+    3px 3px,
+    7px 7px;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    1px 2px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+}
+
+a {
+  color: var(--red);
+}
+
+a:hover {
+  color: var(--red-dark);
+}
+
+:focus-visible {
+  outline: 3px solid var(--brass);
+  outline-offset: 2px;
+}
+
+input[type='range'] {
+  accent-color: var(--red);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Visually hidden but available to screen readers (labels, live regions). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* Every animation in the shop is decorative: honour the visitor's motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Below-the-fold sections: the browser skips their rendering (and the fonts only they use)
+   until they approach the viewport. The intrinsic size keeps the scrollbar honest meanwhile. */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}

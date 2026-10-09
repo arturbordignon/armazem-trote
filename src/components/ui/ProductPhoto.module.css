@@ -1,0 +1,41 @@
+/* The shop has no photographs: each product is "photographed" as its italic initial on a
+   sepia plate, exactly as in the design. */
+.plate {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-body);
+  font-style: italic;
+  line-height: 1;
+  color: #f4ead2;
+}
+
+.card {
+  aspect-ratio: 4 / 3;
+  font-size: 56px;
+  background: radial-gradient(ellipse at 50% 42%, #cdb590 0%, #a38660 62%, #6e5538 100%);
+  text-shadow: 0 2px 8px rgba(40, 25, 10, 0.45);
+}
+
+.detail {
+  aspect-ratio: 1;
+  font-size: clamp(100px, 18vw, 190px);
+  background: radial-gradient(ellipse at 50% 42%, #d3bc97 0%, #a38660 60%, #5e472e 100%);
+  text-shadow: 0 4px 14px rgba(40, 25, 10, 0.45);
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  background: radial-gradient(ellipse at 50% 42%, #cdb590, #8e7150);
+}
+
+.mini {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  padding: 2px;
+  font-size: 18px;
+  border: 1px solid #b8954a;
+  background: radial-gradient(ellipse at 50% 42%, #cdb590, #8e7150);
+}

@@ -1,0 +1,121 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 2px;
+  font-family: var(--font-label);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.sm {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+.md {
+  min-height: 48px;
+  padding: 0 22px;
+  font-size: 16px;
+}
+
+.lg {
+  min-height: 54px;
+  padding: 0 26px;
+  font-size: 17px;
+}
+
+.red {
+  color: #fbf6ea;
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0 1px, transparent 1px 7px),
+    var(--red-gradient);
+  border: 1px solid var(--red-deep);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 3px 0 var(--red-deep);
+}
+
+.red:hover:not(:disabled) {
+  color: #fbf6ea;
+  background: var(--red-gradient-hover);
+}
+
+.red:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--red-deep);
+}
+
+.brass {
+  color: var(--ink);
+  background: var(--brass-gradient);
+  border: 1px solid var(--brass-deep);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+    0 2px 4px rgba(30, 22, 16, 0.35);
+}
+
+.brass:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.brass:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.dark {
+  color: var(--paper-warm);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  letter-spacing: 0.08em;
+}
+
+.dark:hover:not(:disabled) {
+  color: var(--paper-warm);
+}
+
+.link {
+  min-height: 44px;
+  padding: 6px;
+  border: 0;
+  background: none;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: underline;
+  color: var(--ink);
+}
+
+.link:hover:not(:disabled) {
+  color: var(--red-dark);
+}
+
+/* Round brass knob (carousel arrows, drawer close). */
+.knob {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 18px;
+  letter-spacing: 0;
+  color: var(--ink);
+  background: var(--brass-knob);
+  border: 1px solid var(--brass-deep);
+  box-shadow: 0 2px 4px rgba(30, 22, 16, 0.4);
+}

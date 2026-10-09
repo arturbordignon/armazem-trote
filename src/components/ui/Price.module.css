@@ -1,0 +1,42 @@
+.price {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 2px;
+  font-family: var(--font-label);
+}
+
+.currency {
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.reais {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.cents {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.large {
+  gap: 3px;
+}
+
+.large .currency {
+  font-size: 18px;
+  margin-top: 6px;
+}
+
+.large .reais {
+  font-size: 50px;
+}
+
+.large .cents {
+  font-size: 20px;
+  margin-top: 5px;
+}

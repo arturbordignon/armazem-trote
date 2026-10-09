@@ -1,0 +1,27 @@
+.stamp {
+  position: absolute;
+  transform: rotate(-7deg);
+  border: 2px solid var(--red);
+  color: var(--red);
+  background: rgba(251, 246, 234, 0.9);
+  font-family: var(--font-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.small {
+  top: 12px;
+  right: 8px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  padding: 2px 7px;
+}
+
+.large {
+  top: 28px;
+  right: 26px;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  padding: 3px 10px;
+}
