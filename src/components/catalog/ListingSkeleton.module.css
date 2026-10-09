@@ -1,0 +1,39 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  row-gap: 28px;
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+}
+
+.hanger {
+  padding: 0 9px;
+}
+
+.tag {
+  height: 420px;
+  background: #f3ead6;
+  clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%, 0 20px);
+  padding: 28px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.block {
+  background: #e2d4b4;
+}
+
+.photo {
+  aspect-ratio: 4 / 3;
+}
+
+.plank {
+  height: 16px;
+  background: var(--shelf);
+  box-shadow: 0 7px 9px rgba(30, 22, 16, 0.35);
+}

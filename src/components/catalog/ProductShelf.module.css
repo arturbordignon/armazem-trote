@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  row-gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+}
+
+.hanger {
+  flex: 1;
+  padding: 0 9px;
+}
+
+/* The wooden shelf every tag hangs above. */
+.plank {
+  height: 16px;
+  background: var(--shelf);
+  box-shadow: 0 7px 9px rgba(30, 22, 16, 0.35);
+}

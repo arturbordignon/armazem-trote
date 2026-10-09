@@ -1,0 +1,267 @@
+.page {
+  padding-top: 24px;
+  padding-bottom: 52px;
+}
+
+.crumbs {
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-faded);
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.crumbs a {
+  color: inherit;
+}
+
+.crumbs li + li::before {
+  content: '›';
+  margin-right: 6px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 8px 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 3px double var(--ink);
+}
+
+.count {
+  font-family: var(--font-label);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faded);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sortLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-caps);
+  font-size: 16px;
+}
+
+.select {
+  min-height: 44px;
+  padding: 8px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  border: 1px solid var(--ink);
+  background: var(--paper-card);
+  color: var(--ink);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-label);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 6px 10px;
+  border: 1px solid var(--leather);
+  background: var(--tan);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.chip:hover {
+  color: var(--ink);
+  background: #d3b486;
+}
+
+.clear {
+  font-style: italic;
+  font-family: var(--font-body);
+  font-size: 16px;
+  padding: 6px 4px;
+  color: var(--red);
+  text-decoration: underline;
+}
+
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+/* "Caderneta de escolha": filters on a ruled notebook page. */
+.filters {
+  flex: 1 1 230px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 18px 16px 18px 56px;
+  background-color: var(--paper-card);
+  background-image: var(--notebook-margin), var(--notebook-rules);
+  box-shadow:
+    0 2px 2px rgba(30, 22, 16, 0.15),
+    0 10px 18px rgba(30, 22, 16, 0.14);
+}
+
+/* Until the visitor toggles them, filters are open on wide screens and folded on phones. */
+@media (max-width: 819px) {
+  .body[data-filters='auto'] .filters {
+    display: none;
+  }
+}
+
+.body[data-filters='closed'] .filters {
+  display: none;
+}
+
+.toggleWide {
+  display: inline;
+}
+
+.toggleNarrow {
+  display: none;
+}
+
+@media (max-width: 819px) {
+  .toggleWide {
+    display: none;
+  }
+
+  .toggleNarrow {
+    display: inline;
+  }
+}
+
+.notebookTitle {
+  font-family: var(--font-script);
+  font-size: 15px;
+  color: #3a4e7a;
+}
+
+.fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.legend {
+  font-family: var(--font-caps);
+  font-size: 17px;
+  margin-bottom: 6px;
+  padding: 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  min-height: 32px;
+}
+
+.option input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--red);
+}
+
+.optionName {
+  flex: 1;
+}
+
+.optionCount {
+  font-family: var(--font-label);
+  font-size: 13px;
+  color: var(--ink-faded);
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.priceLabel {
+  font-family: var(--font-caps);
+  font-size: 17px;
+}
+
+.priceValue {
+  font-family: var(--font-label);
+  color: var(--red);
+}
+
+.range {
+  width: 100%;
+}
+
+.rangeEnds {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-label);
+  font-size: 12px;
+  color: var(--ink-faded);
+}
+
+.results {
+  flex: 999 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.empty {
+  padding: 40px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  background: var(--paper-card);
+  box-shadow: var(--framed-card);
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 28px;
+}
+
+.emptyText {
+  font-size: 18px;
+  color: var(--ink-muted);
+  max-width: 40ch;
+  font-style: italic;
+}
+
+.subsections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -8px 0 18px;
+}
