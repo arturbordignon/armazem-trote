@@ -1,0 +1,41 @@
+.list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-label);
+  font-size: 16px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.row dd {
+  margin: 0;
+  text-align: right;
+}
+
+.total {
+  align-items: baseline;
+  border-top: 3px double var(--ink);
+  padding-top: 10px;
+  margin-top: 4px;
+}
+
+.total dt {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.total dd {
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.compact .total dd {
+  font-size: 25px;
+}

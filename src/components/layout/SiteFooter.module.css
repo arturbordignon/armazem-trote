@@ -1,0 +1,62 @@
+.footer {
+  margin-top: 28px;
+}
+
+/* Hydraulic floor tiles. */
+.tiles {
+  height: 26px;
+  background-color: #e8dcc4;
+  background-image:
+    radial-gradient(circle at 50% 50%, #8b2b1f 0 13%, transparent 14%),
+    radial-gradient(circle at 0 0, #2f4a3f 0 22%, transparent 23%),
+    radial-gradient(circle at 100% 0, #2f4a3f 0 22%, transparent 23%),
+    radial-gradient(circle at 0 100%, #2f4a3f 0 22%, transparent 23%),
+    radial-gradient(circle at 100% 100%, #2f4a3f 0 22%, transparent 23%);
+  background-size: 26px 26px;
+}
+
+/* Cobblestones. */
+.street {
+  padding: 36px var(--gutter) 40px;
+  background-color: #5e574c;
+  background-image:
+    radial-gradient(ellipse 33px 19px at 36px 22px, #a39d90 0 78%, transparent 95%),
+    radial-gradient(ellipse 33px 19px at 0 0, #8f897d 0 78%, transparent 95%),
+    radial-gradient(ellipse 33px 19px at 72px 44px, #8f897d 0 78%, transparent 95%),
+    radial-gradient(ellipse 33px 19px at 72px 0, #97917f 0 78%, transparent 95%),
+    radial-gradient(ellipse 33px 19px at 0 44px, #97917f 0 78%, transparent 95%);
+  background-size: 72px 44px;
+}
+
+.plaque {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: linear-gradient(180deg, #ebd08a 0%, #c49a45 50%, #9c7630 100%);
+  border: 1px solid var(--brass-deep);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 0 0 5px rgba(0, 0, 0, 0.06),
+    0 6px 12px rgba(0, 0, 0, 0.5);
+  color: var(--ink);
+}
+
+.name {
+  font-family: var(--font-western);
+  font-size: 24px;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.6);
+}
+
+.address {
+  font-family: var(--font-caps);
+  font-size: 16px;
+}
+
+.note {
+  font-style: italic;
+  font-size: 15px;
+}

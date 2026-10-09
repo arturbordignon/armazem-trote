@@ -1,0 +1,156 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 22, 16, 0.6);
+  z-index: 60;
+  animation: fade 0.2s ease-out;
+}
+
+/* "CAIXOTE Nº 1887": a wooden crate sliding in from the right. */
+.crate {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(430px, 100vw);
+  z-index: 61;
+  display: flex;
+  flex-direction: column;
+  background-color: #a87a4c;
+  background-image:
+    repeating-linear-gradient(180deg, transparent 0 62px, rgba(40, 20, 5, 0.55) 62px 65px),
+    repeating-linear-gradient(0.8deg, rgba(60, 30, 10, 0.16) 0 1px, transparent 1px 9px),
+    linear-gradient(90deg, #b08356, #9a6e42);
+  border-left: 10px solid var(--wood-light);
+  box-shadow: -10px 0 24px rgba(0, 0, 0, 0.4);
+  animation: slide-in 0.28s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+
+.head {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--ink);
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+  margin: 0;
+  font-weight: 400;
+}
+
+.stencil {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.8;
+}
+
+.close {
+  font-size: 22px;
+}
+
+.contents {
+  flex: 1;
+  overflow: auto;
+  margin: 6px 16px 14px;
+  padding: 4px 16px;
+  background: var(--paper-card);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.empty {
+  padding: 40px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 24px;
+}
+
+.emptyNote {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--ink-muted);
+}
+
+.summary {
+  margin: 0 16px 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--tan);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-label);
+}
+
+.subtotalLabel {
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.subtotalValue {
+  font-weight: 600;
+  font-size: 26px;
+}
+
+.note {
+  font-style: italic;
+  font-size: 15px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.action {
+  min-height: 50px;
+  padding: 0 8px;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
