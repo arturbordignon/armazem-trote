@@ -8,6 +8,7 @@ import {
   couponSchema,
   destinationSchema,
   freightChoiceSchema,
+  rememberFreightSchema,
   updateCartLineSchema,
 } from '@/validators/cart';
 import { type ActionResult, defineAction } from './actions';
@@ -60,6 +61,18 @@ const freight = defineAction(
   },
 );
 
+const remember = defineAction(
+  'cart.remember-freight',
+  rememberFreightSchema,
+  { rateLimit: 'cart' },
+  async (input) => {
+    const existing = await readCartId();
+    const { cartId, cart } = await cartService.rememberFreight(existing, input);
+    if (cartId !== existing) await writeCartId(cartId);
+    return cart;
+  },
+);
+
 export async function addToCartAction(input: unknown): Promise<ActionResult<CartView>> {
   return add(input);
 }
@@ -78,4 +91,8 @@ export async function setDestinationAction(input: unknown): Promise<ActionResult
 
 export async function chooseFreightAction(input: unknown): Promise<ActionResult<CartView>> {
   return freight(input);
+}
+
+export async function rememberFreightAction(input: unknown): Promise<ActionResult<CartView>> {
+  return remember(input);
 }

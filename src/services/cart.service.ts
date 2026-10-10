@@ -99,6 +99,24 @@ export async function chooseFreight(cartId: string, method: FreightMethodCode): 
   };
 }
 
+/**
+ * Keeps the CEP (and animal) quoted on a product page, creating the cart if needed, so the cart
+ * opens already quoted. The animal is only a preference: hydrate drops it if it can't carry
+ * the whole cart.
+ */
+export async function rememberFreight(
+  cartId: string | null,
+  choice: { cep: string; method?: FreightMethodCode },
+): Promise<{ cartId: string; cart: CartView }> {
+  const digits = normalizeCep(choice.cep);
+  if (!digits) throw new ValidationError('O CEP precisa de 8 números, como 37540-000.');
+  const id = cartId ?? randomUUID();
+  const settings: { cep: string; freight?: string } = { cep: digits };
+  if (choice.method) settings.freight = choice.method;
+  await cartStore.updateSettings(id, settings);
+  return { cartId: id, cart: await getCart(id) };
+}
+
 export async function clearCart(cartId: string): Promise<void> {
   await cartStore.deleteCart(cartId);
 }

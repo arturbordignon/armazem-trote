@@ -30,3 +30,9 @@ export const freightMethodSchema = z.enum(
 );
 
 export const freightChoiceSchema = z.object({ method: freightMethodSchema });
+
+/** A product page's quote, kept for the cart: the CEP and, once picked, the animal. */
+export const rememberFreightSchema = z.object({
+  cep: cepSchema,
+  method: z.optional(freightMethodSchema),
+});

@@ -3,6 +3,7 @@ import {
   addToCartAction,
   applyCouponAction,
   chooseFreightAction,
+  rememberFreightAction,
   setDestinationAction,
   updateCartLineAction,
 } from '@/controllers/cart.actions';
@@ -171,6 +172,14 @@ export function setDestination(cep: string): Promise<ActionResult<CartView>> {
 
 export function chooseFreight(method: FreightMethodCode): Promise<ActionResult<CartView>> {
   return mutate(null, () => chooseFreightAction({ method }));
+}
+
+/** Keeps a product page's freight quote in the cart, so the cart page opens already quoted. */
+export function rememberFreight(choice: {
+  cep: string;
+  method?: FreightMethodCode;
+}): Promise<ActionResult<CartView>> {
+  return mutate(null, () => rememberFreightAction(choice));
 }
 
 export function openDrawer(): void {

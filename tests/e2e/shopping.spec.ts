@@ -16,15 +16,15 @@ test('search → product → cart → checkout → telegram', async ({ page }) =
   await page.goto('/');
   await searchAndOpen(page, 'lampi', 'Lampião a querosene');
 
-  // Product page: pick a finish and two units, quote freight, add to the cart.
+  // Product page: pick a finish and two units, quote freight, pick an animal, add to the cart.
   await page.getByRole('button', { name: 'Cobre' }).click();
   await page.getByRole('button', { name: 'Aumentar', exact: true }).click();
   await page.getByRole('textbox', { name: 'CEP' }).fill('30140071');
   await page.getByRole('button', { name: 'Calcular' }).click();
   await expect(page.getByText(/Destino: Belo Horizonte \(MG\) · 55 léguas/)).toBeVisible();
-  await expect(
-    page.getByRole('group', { name: 'Opções de frete' }).getByRole('button'),
-  ).toHaveCount(3);
+  const productFreight = page.getByRole('group', { name: 'Opções de frete' });
+  await expect(productFreight.getByRole('button')).toHaveCount(3);
+  await productFreight.getByRole('button', { name: /Cavalo/ }).click();
 
   // The product's own button comes first; related products further down have one each too.
   await page.getByRole('button', { name: 'Adicionar à carroça' }).first().click();
@@ -33,15 +33,17 @@ test('search → product → cart → checkout → telegram', async ({ page }) =
   await expect(drawer.getByText('Acabamento: Cobre')).toBeVisible();
   await expect(drawer.getByText('R$ 179,80').first()).toBeVisible();
 
-  // Cart page: coupon and freight, all totals computed by the server.
+  // Cart page: opens with the product page's CEP and animal; coupon and totals from the server.
   await drawer.getByRole('button', { name: 'Ver carroça' }).click();
   await expect(page.getByRole('heading', { name: 'Sua carroça' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'CEP' })).toHaveValue('30140-071');
+  await expect(page.getByRole('button', { name: /Cavalo/ })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
   await page.getByRole('textbox', { name: 'Cupom do armazém' }).fill('galinha10');
   await page.getByRole('button', { name: 'Aplicar' }).click();
   await expect(page.getByText('Cupom aceito: 10% de desconto em toda a carroça.')).toBeVisible();
-  await page.getByRole('textbox', { name: 'CEP' }).fill('30140-071');
-  await page.getByRole('button', { name: 'Calcular' }).click();
-  await page.getByRole('button', { name: /Cavalo/ }).click();
   const ledger = page.getByRole('complementary', { name: 'Resumo do pedido' });
   await expect(ledger.getByText('− R$ 17,98')).toBeVisible();
   await expect(ledger.getByText(/R\$\s17,85 · Cavalo/)).toBeVisible();

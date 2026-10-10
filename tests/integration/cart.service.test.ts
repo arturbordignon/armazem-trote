@@ -119,6 +119,16 @@ describe('guest cart (Redis + Postgres)', () => {
     expect(view.totals.freightCents).toBeNull();
   });
 
+  it('keeps a product page quote for the cart, even before the first add', async () => {
+    const { cartId } = await cart.rememberFreight(null, { cep: '30140-071' });
+    await cart.rememberFreight(cartId, { cep: '30140-071', method: 'cavalo' });
+    const { cart: view } = await cart.addToCart(cartId, lampiaoLatao, 1);
+    expect(view.cep).toBe('30140071');
+    expect(view.destination).toMatchObject({ city: 'Belo Horizonte' });
+    expect(view.selectedFreight).toBe('cavalo');
+    expect(view.totals).toMatchObject({ freightCents: 1785, totalCents: 8990 + 1785 });
+  });
+
   it('silently drops products that left the catalog', async () => {
     const { cartId } = await cart.addToCart(null, lampiaoLatao, 1);
     await db.execute(sql`UPDATE products SET is_active = false WHERE slug = 'lampiao'`);

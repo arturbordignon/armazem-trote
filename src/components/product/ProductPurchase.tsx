@@ -5,7 +5,7 @@ import { type FormEvent, useEffect, useRef, useState } from 'react';
 import type { ProductDetail } from '@/models/catalog.types';
 import { type FreightMethodCode, MAX_LINE_QUANTITY } from '@/models/constants';
 import type { FreightQuote } from '@/models/freight.types';
-import { addItem, openDrawer } from '@/components/cart/cart-store';
+import { addItem, openDrawer, rememberFreight } from '@/components/cart/cart-store';
 import { destinationLabel, maskCep } from '@/components/freight/destination';
 import { Button } from '@/components/ui/Button';
 import styles from './Product.module.css';
@@ -125,10 +125,12 @@ function StockLine({ available, isBulky }: { available: number; isBulky: boolean
 
 /**
  * Quotes freight for this product and quantity. A newer request aborts an older one still in
- * flight, so a slow answer can never overwrite a fresher one.
+ * flight, so a slow answer can never overwrite a fresher one. The quoted CEP and the picked
+ * animal are kept in the cart, so the cart page opens already quoted.
  */
 function FreightCalculator({ slug, quantity }: { slug: string; quantity: number }) {
   const [cep, setCep] = useState('');
+  const [quotedCep, setQuotedCep] = useState('');
   const [quote, setQuote] = useState<FreightQuote | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<FreightMethodCode | null>(null);
@@ -153,7 +155,9 @@ function FreightCalculator({ slug, quantity }: { slug: string; quantity: number 
       }
       setError(null);
       setQuote(body);
+      setQuotedCep(cep);
       setCep(maskCep(body.destination.cepPrefix + cep.replace(/\D/g, '').slice(5)));
+      void rememberFreight({ cep });
     } catch (failure) {
       if ((failure as Error).name !== 'AbortError')
         setError('Sem sinal do telégrafo. Tente de novo.');
@@ -196,7 +200,14 @@ function FreightCalculator({ slug, quantity }: { slug: string; quantity: number 
       {quote ? (
         <>
           <span className={styles.destination}>{destinationLabel(quote.destination)}</span>
-          <FreightOptions options={quote.options} selected={selected} onSelect={setSelected} />
+          <FreightOptions
+            options={quote.options}
+            selected={selected}
+            onSelect={(method) => {
+              setSelected(method);
+              void rememberFreight({ cep: quotedCep, method });
+            }}
+          />
         </>
       ) : (
         <span className={styles.hint}>
