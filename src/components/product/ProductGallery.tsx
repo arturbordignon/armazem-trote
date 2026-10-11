@@ -7,14 +7,14 @@ import styles from './Product.module.css';
 
 const VIEWS = ['Frente', 'Detalhe', 'Em uso', 'Na carroça'] as const;
 
-/** "Photographia Trote & Cia": the plate and its four views. */
+/** "Photographia Trote": the plate and its four views. */
 export function ProductGallery({ name, badge }: { name: string; badge: string | null }) {
   const [view, setView] = useState(0);
   return (
     <div className={styles.gallery}>
       <div className={styles.frame} role="tabpanel" aria-label={VIEWS[view]}>
         <ProductPhoto name={name} size="detail" />
-        <span className={styles.caption}>Photographia Trote &amp; Cia · {VIEWS[view]}</span>
+        <span className={styles.caption}>Photographia Trote · {VIEWS[view]}</span>
         {badge && <Stamp size="large">{badge}</Stamp>}
       </div>
       <div role="tablist" aria-label="Imagens do produto" className={styles.thumbs}>

@@ -1,4 +1,4 @@
-# Armazém Trote & Cia
+# Armazém & Trote
 
 Secos & molhados since 1887, delivered at the pace of a hoof: by donkey, horse or cart, with
 freight priced in _léguas_. A portfolio e-commerce built from a Claude Design mock-up, keeping

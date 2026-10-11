@@ -12,7 +12,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<'/secao/[slug]'>): Promise<Metadata> {
   const { slug } = await params;
   const page = await loadListingPage({}, slug);
-  return { title: page.title, description: `${page.title}: mercadorias do Armazém Trote & Cia.` };
+  return { title: page.title, description: `${page.title}: mercadorias do Armazém & Trote.` };
 }
 
 /** One section. The unfiltered first page is prerendered; filters stream in behind the skeleton. */

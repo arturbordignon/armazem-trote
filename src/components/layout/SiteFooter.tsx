@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className={styles.tiles} aria-hidden="true" />
       <div className={styles.street}>
         <div className={styles.plaque}>
-          <span className={styles.name}>Armazém Trote &amp; Cia</span>
+          <span className={styles.name}>Armazém &amp; Trote</span>
           <span className={styles.address}>
             Rua do Commercio, 12 · Ouro Fino, Minas · Fundado em 1887
           </span>

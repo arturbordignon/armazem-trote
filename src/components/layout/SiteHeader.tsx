@@ -23,12 +23,8 @@ export async function SiteHeader() {
       <header className={styles.header}>
         <div className={styles.facade}>
           <div className={styles.bar}>
-            <Link
-              href="/"
-              className={styles.sign}
-              aria-label="Armazém Trote & Cia — página inicial"
-            >
-              <span className={styles.signName}>Armazém Trote &amp; Cia</span>
+            <Link href="/" className={styles.sign} aria-label="Armazém & Trote — página inicial">
+              <span className={styles.signName}>Armazém &amp; Trote</span>
               <span className={styles.signTagline}>Secos &amp; Molhados · Desde 1887</span>
             </Link>
             <div className={styles.search}>

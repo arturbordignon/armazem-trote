@@ -9,8 +9,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Armazém Trote & Cia — Secos & Molhados, desde 1887',
-    template: '%s · Armazém Trote & Cia',
+    default: 'Armazém & Trote — Secos & Molhados, desde 1887',
+    template: '%s · Armazém & Trote',
   },
   description:
     'Mercadorias finas entregues no ritmo do casco — de burro, cavallo ou charrete. Frete calculado em léguas.',

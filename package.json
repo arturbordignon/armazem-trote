@@ -2,7 +2,7 @@
   "name": "armazem-trote",
   "version": "0.1.0",
   "private": true,
-  "description": "Armaz\u00e9m Trote & Cia \u2014 secos & molhados entregues no ritmo do casco.",
+  "description": "Armaz\u00e9m & Trote \u2014 secos & molhados entregues no ritmo do casco.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "engines": {
